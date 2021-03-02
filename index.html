@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="shortcut icon" href="https://assets.pokemon.com/static2/_ui/img/favicon.ico" />
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@0.11.x/dist/full.css" rel="stylesheet" type="text/css" />
+    <title>POKEDEX</title>
+  </head>
+
+  <body class="antialiased font-sans">
+
+    <div class="principal overflow-hidden">
+
+      <div class="contenedordepages h-screen flex flex-nowrap relative">
+
+        <div class="pagina1 overflow-y-auto w-full flex-shrink-0 bg-red-700">
+          <div class="container m-auto max-w-3xl mt-1 p-1 sm:px-2">
+            <div class="pb-1 text-5xl font-bold text-content-primary text-center">POKEDEX</div>
+            <div class="pt-1 h-4/5 sticky top-0 bg-red-800 z-50 sm:rounded-lg sm:pt-0">
+              <div class="rounded-lg flex items-center w-full p-3 shadow-sm bg-red-800">
+                <input type="search" id="search" placeholder="Busca un pokemon..." class="w-full text-2xl outline-none focus:outline-none bg-transparent text-white placeholder-white focus:placeholder-opacity-75" />
+                <div class="form-control">
+                  <label class="cursor-pointer label">
+                      <input id="checkfiltro" type="checkbox" class="toggle toggle-accent" />
+                      <span class="toggle-mark"> </span>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="items my-4 md:z-30 shadow rounded-lg p-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5 bg-red-600">
+              <img class="imgcargando col-span-full" src="https://i.imgur.com/aMz1Qtu.gif" />
+              <button class="col-span-full btn btn-sm btn-ghost loading text-3xl text-white">Cargando</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="pagina2 w-full flex-shrink-0 bg-red-600">
+          <div class="container h-full m-auto max-w-3xl relative">
+            <div class="inset-x-0 top-0 absolute z-20 p-1">
+              <svg onclick="atras();" class="animate-bounce cursor-pointer text-white hover:shadow-md absolute hover:text-gray-900" width="32" height="32" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+              </svg>
+            </div>
+            <div class="bg-blue-300 h-full">
+              <div class="shadow-2xl relative h-full">
+                <div class="h-2/6 bg-cover bg-center relative" style="background-image: url('https://cutewallpaper.org/21/pokemon-grass-background/Pokemon-forest-by-BlazingIfrit-Fur-Affinity-dot-net.jpg')">
+                  <p class="tpoketitulo text-gray-100 font-bold text-4xl absolute top-0 right-0 p-1 uppercase">bulbasaur</p>
+
+                  <div class="p-8 bottom-0 bg-white absolute w-full rounded-t-full border-opacity-0 border-0">
+                    <img class="fotitoinfo transition duration-500 hover:-translate-y-32 hover:scale-110 right-1/2 transform translate-x-1/2 w-36 h-36 absolute -translate-y-3/4" src="https://projectpokemon.org/images/summary-backgrounds/shiny_effect_blue.gif" alt="Avatar of Jonathan Reinink" />
+                  </div>
+                </div>
+                <div class="bg-white px-8 h-4/6">
+                  <div class="pt-6">
+                    <h1 class="tpokenombre text-2xl font-bold text-gray-700 text-center"></h1>
+                    <p class="tpoketipo text-sm text-gray-600 text-center"></p>
+                    <p class="tpokedescripcion text-gray-700 pt-4">.</p>
+                    <div class="pt-4 pb-1 flex items-baseline">
+                      <span class="tpokehabilidad1 bg-blue-300 ring-blue-300 ring-opacity-50 ring-4 ring-offset-1 text-teal-800 text-xs py-1 px-3 inline-block rounded-full uppercase font-semibold tracking-wide"></span>
+                      <span class="tpokehabilidad2 ml-4 bg-green-300 ring-green-300 ring-opacity-50 ring-4 ring-offset-12 text-teal-800 text-teal-800 text-xs py-1 px-3 inline-block rounded-full uppercase font-semibold tracking-wide"></span>
+                    </div>
+                    <div class="flex justify-around pb-4 text-grey-dark pt-4">
+                      <div class="text-center mr-3">
+                        <h2 class="tpokealtura"></h2>
+                        <span class="font-bold">Altura</span>
+                      </div>
+                      <div class="text-center mr-3 border-r border-red-400 pr-3"></div>
+                      <div class="text-center mr-3">
+                        <h2 class="tpokepeso"></h2>
+                        <span class="font-bold">Peso</span>
+                      </div>
+                      <div class="text-center mr-3 border-r border-red-400 pr-3"></div>
+                      <div class="text-center mr-3">
+                        <h2 class="tpokeexp"></h2>
+                        <span class="font-bold">EXP</span>
+                      </div>
+                    </div>
+                    <div class="flex">
+                      <div class="leading-none pr-2 text-gray-600">
+                        <p class="text-xs">HP</p>
+                        <p class="text-xs">ATK</p>
+                        <p class="text-xs">DEF</p>
+                        <p class="text-xs">SATK</p>
+                        <p class="text-xs">SDEF</p>
+                        <p class="text-xs">SDP</p>
+                      </div>
+                      <div class="leading-none flex-auto progress-info">
+                        <progress class="progress progress-secondary" id="HP" value="0" max="100"></progress>
+                        <progress class="progress progress-warning" id="ATK" value="0" max="100"></progress>
+                        <progress class="progress progress-info" id="DEF" value="0" max="100"></progress>
+                        <progress class="progress progress-error" id="SATK" value="0" max="100"></progress>
+                        <progress class="progress progress-accent" id="SDEF" value="0" max="100"></progress>
+                        <progress class="progress progress-primary" id="SDP" value="0" max="100"></progress>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
